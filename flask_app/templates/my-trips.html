@@ -8,6 +8,53 @@
     <title>My Trips</title>
 </head>
 <body>
-    
+    <div class="container w-80">
+        <div class="card" style="border-radius: 15px">
+
+            <div class="card-header bg-primary text-white">
+                <h1>Welcome {{user.first_name}}</h1>
+            </div>
+
+            <div class="card-body p-10">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Departing From</th>
+                            <th scope="col">Travelling To</th>
+                            <th scope="col">Travel Ban</th>
+                            <th scope="col">Check Required Documents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for trip in trips %}
+                        <tr>
+                            <td>{{trip.name}}</td>
+                            {% if recipe.under30 == 1%}
+                            <td>Yes</td>
+                            {% else %}
+                            <td>No</td>
+                            {% endif %}
+                            <td>
+                                <a href="/recipe/{{recipe.id}}">View</a>
+                                {% if recipe.user_id == session.user_id %}
+                                <a href="/edit/recipe/{{recipe.id}}">Edit</a>
+                                <a href="/destroy/recipe/{{recipe.id}}">Delete</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <a class="btn btn-primary mb-3" href="/new/recipe">Add New Recipe</a>
+
+                <form action="/logout" method="post">
+                    <button type="submit" class="btn btn-danger">Log Out</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>

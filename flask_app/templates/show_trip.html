@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>View Trip</title>
+    <script src="/static/show_trip.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="border-radius: 15px">
+                    <div class="card-header bg-primary text-white">
+                        <h1>Travel Details</h1>
+                    </div>
+                    <div class="card-body p-10">
+                        <h5 class="card-title">Departing Country</h5>
+                        <p class="card-text mb-3" id="countries-departing">{{trip.departing_country}}</p>
+                        <h5 class="card-title">Arriving Country</h5>
+                        <p class="card-text mb-3" id="countries-travelling-to">{{trip.arriving_country}}</p>
+                        <h5 class="card-title">Trip Created At</h5>
+                        <p class="card-text mb-3">{{trip.created_at}}</p>
+                        <h5 class="card-title">Trip Updated On</h5>
+                        <p class="card-text mb-3">{{trip.updated_at}}</p>
+
+                        <h5 class="card-title">Travel Ban Status</h5>
+                        <p id="travel-ban" class="card-text mb-3"></p>
+
+                        <h5 class="card-title">Travel Ban Status Last Updated</h5>
+                        <p id="travel-ban-update-date" class="card-text mb-3"></p>
+
+                        <h5 class="card-title">Documentation Required</h5>
+                        <p id="documentation-required" class="card-text mb-3"></p>
+
+                        <h5 class="card-title">Summary</h5>
+                        <p id="summary" class="card-text mb-3"></p>
+
+                        <h5 class="card-title">Entry Documentation Link</h5>
+                        <p id="documentation-link" class="card-text mb-3"></p>
+
+                        <h5 class="card-title">Entry Documentation Last Updated</h5>
+                        <p id="last-updated" class="card-text mb-3"></p>
+
+                        <a class="btn btn-primary mb-3" href="/dashboard">Dashboard</a>
+
+                        {% if trip.user_id == session.user_id %}
+                        <a class="btn btn-secondary mb-3" href="/edit/trip/{{trip.id}}">Edit</a>
+
+                        <a class="btn btn-danger mb-3" href="/destroy/trip/{{trip.id}}">Delete</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

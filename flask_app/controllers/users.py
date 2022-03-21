@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, session, flash
 from flask_app import app
-# from flask_app.models.tv_show import TvShow
+from flask_app.models.trip import Trip
 from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
 
@@ -16,29 +16,12 @@ def login():
 
 @app.route('/dashboard')
 def success():
-    #if 'user_id' not in session:
-        #return redirect('/logout')
-    #data = {
-        #'id': session['user_id']
-    #}
-    return render_template('dashboard.html')
-    #return render_template('dashboard.html', user=User.get_by_id(data), tv_shows=TvShow.get_all())
-
-@app.route('/my-trips')
-def myTrips():
     if 'user_id' not in session:
         return redirect('/logout')
     data = {
         'id': session['user_id']
     }
-    return render_template('my-trips', user=User.get_by_id(data), trips=TvShow.get_all())
-
-# Logout
-@app.route('/logout')
-def logout():
-    session.clear()
-    print('Session Cleared')
-    return redirect('/')
+    return render_template('dashboard.html', user=User.get_by_id(data), trips=Trip.get_all())
 
 # POST routes
 # Register a user
@@ -80,3 +63,10 @@ def userlogin():
         return redirect('/')
     session['user_id'] = user_in_db.id
     return redirect('/dashboard')
+
+# Logout
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    print('Session Cleared')
+    return redirect('/')
