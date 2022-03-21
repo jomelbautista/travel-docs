@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    getCountryNamesA('#countries-departing');
-    getCountryNamesA('#countries-travelling-to');
+    getCountryNames('#countries-departing');
+    getCountryNames('#countries-travelling-to');
 })
 
 
@@ -14,9 +14,30 @@ function getCountryNames(id) {
         coderData.forEach(country => {
             option = document.createElement('option');
             option.text = `${country.name}`;
-            option.value = `${country.alpha2Code}`;
+            option.value = `${country.name}`;
             dropDown.add(option);
         })
+    })
+    .catch(err => console.log(err) );
+}
+
+// API call to populate country names into select dropdown
+function getCountryCodeDeparture(countryName) {
+    let countryCodeSrc = document.querySelector("#country-code-departing");
+    fetch(`https://restcountries.com/v2/name/${countryName}?fullText=true`)
+    .then(response => response.json() )
+    .then(coderData => {
+        countryCodeSrc.value = coderData[0]['alpha2Code'];
+    })
+    .catch(err => console.log(err) );
+}
+
+function getCountryCodeArrival(countryName) {
+    let countryCodeSrc = document.querySelector("#country-code-arriving");
+    fetch(`https://restcountries.com/v2/name/${countryName}?fullText=true`)
+    .then(response => response.json() )
+    .then(coderData => {
+        countryCodeSrc.value = coderData[0]['alpha2Code'];
     })
     .catch(err => console.log(err) );
 }

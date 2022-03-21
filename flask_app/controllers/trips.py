@@ -55,7 +55,9 @@ def create_trip():
         return redirect('/new/trip')
     data = {
         'departing_country': request.form['departing_country'],
+        'departing_country_code' : request.form['departing_country_code'],
         'arriving_country': request.form['arriving_country'],
+        'arriving_country_code' : request.form['arriving_country_code'],
         'user_id': session['user_id']
     }
     Trip.save(data)
@@ -68,7 +70,9 @@ def update_trip():
     data = {
         'id': request.form['id'],
         'departing_country': request.form['departing_country'],
+        'departing_country_code' : request.form['departing_country_code'],
         'arriving_country': request.form['arriving_country'],
+        'arriving_country_code' : request.form['arriving_country_code'],
     }
     Trip.update_trip(data)
     return redirect('/dashboard')

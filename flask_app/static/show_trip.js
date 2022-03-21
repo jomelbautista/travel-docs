@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let countryCodeDeparture = document.querySelector("#countries-departing").innerHTML;
-    let countryCodeArrival = document.querySelector("#countries-travelling-to").innerHTML;
+    let countryCodeDeparture = document.querySelector("#countries-departing-code").innerHTML;
+    let countryCodeArrival = document.querySelector("#countries-travelling-to-code").innerHTML;
     getTravelRestrictions(countryCodeDeparture, countryCodeArrival);
 })
 
@@ -9,7 +9,7 @@ function getTravelRestrictions(countryCodeDeparture, countryCodeArrival) {
     fetch(url, {
         method: "GET",
         headers: {
-            "Authorization": "Bearer TZE04rOhFpr4j4dGJJyxBouZeQZX",
+            "Authorization": "Bearer 7FzDVJFzm4eOkKpXp3UdxoEyfTet",
         },
         mode:"cors",
         catch:"default"

@@ -23,16 +23,28 @@
 
                             <div class="mb-3">
                                 <label for="countries-departing" class="select-label">Departing From</label>
-                                <select class="form-control form-select-lg" id="countries-departing" name="departing_country" style="width: 500px;">
+                                <select class="form-control form-select-lg" id="countries-departing" name="departing_country" style="width: 500px;" onchange="getCountryCodeDeparture(this.value)">
                                     <option selected></option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
+                                <label for="departing_country_code" class="form-label">Departing Country Code</label>
+                                <input id="country-code-departing" class="form-control" name="departing_country_code" type="text" style="width: 500px;" readonly>
+                            </div>
+
+
+
+                            <div class="mb-3">
                                 <label for="countries-arrival" class="select-label">Travelling To</label>
-                                <select class="form-control form-select-lg" id="countries-travelling-to" name="arriving_country" style="width: 500px;">
+                                <select class="form-control form-select-lg" id="countries-travelling-to" name="arriving_country" style="width: 500px;" onchange="getCountryCodeArrival(this.value)">
                                     <option selected></option>
                                 </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="arriving_country_code" class="form-label">Arriving Country Code</label>
+                                <input id="country-code-arriving" class="form-control" name="arriving_country_code" type="text" style="width: 500px;" readonly>
                             </div>
 
                             <div class="mb-3">
