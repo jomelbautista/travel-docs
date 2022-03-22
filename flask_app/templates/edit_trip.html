@@ -9,12 +9,35 @@
     <title>Edit Trip</title>
 </head>
 <body>
-    <div class="container">
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">My Trips</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/new/trip">Add New Trip</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            </ul>
+    </nav>
+
+    <div class="jumbotron text-center">
+        <h1 class="display-6">Edit Trip</h1>
+        <p class="lead text-muted">
+            Change in plans? Please select Country you are leaving from and planning to travel to.
+        </p>
+    </div>
+
+
+    <div class="container mb-3">
         <div class="row">
             <div class="col">
                 <div class="card" style="border-radius: 15px">
                     <div class="card-header bg-primary text-white">
-                        <h1>Edit Trip</h1>
+                        <h2>Edit Trip</h2>
                     </div>
                     <div class="card-body p-10">
                         <form action="/update/trip" method="POST">
@@ -47,14 +70,8 @@
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Update Trip</button>
                             </div>
-
-                            <a class="btn btn-primary mb-3" href="/dashboard">My Trips</a>
-    
                         </form>
-
-                        <form action="/logout" method="post">
-                            <button type="submit" class="btn btn-danger">Log Out</button>
-                        </form>
+                        <a class="btn btn-secondary mb-3" href="/dashboard">Cancel</a>
 
 
                         <div class="mt-3 mb-3 text-danger">
@@ -71,5 +88,11 @@
             </div>
         </div>
     </div>
+
+    <div class="container text-muted text-center">
+        <p>Country photos powered by Unsplash.com | Country flag images powered by Flagpedia.net</p>
+        <p>Country data powered by Restcountries.com | Travel data powered by Amadeus.com</p>
+    </div>
+
 </body>
 </html>

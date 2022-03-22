@@ -4,56 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <title>Dashboard</title>
 </head>
 <body>
 
-    <div class="container w-auto">
-        <div class="card" style="border-radius: 15px">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link active" href="/dashboard">My Trips</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/new/trip">Add New Trip</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            </ul>
+    </nav>
 
-            <div class="card-header bg-primary text-white">
-                <h1>Welcome {{user.first_name}}</h1>
+    <div class="jumbotron text-center">
+        <h1 class="display-3">Welcome, {{user.first_name}}</h1>
+        <p class="lead text-muted">
+            Add a new trip you plan to go on to check current entry status and required documentation you may need. 
+        </p>
+        <p class="lead">
+            <a class="btn-lg btn-success mb-3" href="/new/trip">Add New Trip</a>
+        </p>
+    </div>
+
+    <div class="container mb-3">
+        <div class="row justify-content-center">
+            {% for trip in trips %}
+            {% if trip.user_id == session.user_id %}
+            <div class="col-3">
+                <div class="card text-center mb-3 bg-light">
+
+                        <img src="https://source.unsplash.com/random/100×100/?{{trip.arriving_country|lower}}" class="img-fluid" alt="{{trip.arriving_country}}"/>
+
+
+                    <div class="card-body">
+                        <h4 class="card-title">{{trip.arriving_country}}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted">Departing from {{trip.departing_country}}</h6>
+                        <a class="btn-sm btn-info" href="/trip/{{trip.id}}">Check Travel Status</a>
+                    </div>
+
+                    <div class="card-footer">
+                        <a href="/edit/trip/{{trip.id}}">Edit</a> |
+                        <a href="/destroy/trip/{{trip.id}}">Delete</a></div>
+                </div>
             </div>
-
-            <div class="card-body p-10">
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Departing Country</th>
-                            <th scope="col">Arrival Country</th>
-                            <th scope="col">Check Travel Restrictions</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for trip in trips %}
-                        <tr>
-                            {% if trip.user_id == session.user_id %}
-                            <td>{{trip.departing_country}}</td>
-                            <td>{{trip.arriving_country}}</td>
-                            <td><a href="/trip/{{trip.id}}">Travel Restrictions</a></td>
-                            <td>
-
-                                <a href="/edit/trip/{{trip.id}}">Edit</a> |
-                                <a href="/destroy/trip/{{trip.id}}">Delete</a>
-                            </td>
-
-                            {% endif %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-
-                <a class="btn btn-primary mb-3" href="/new/trip">Add New Trip</a>
-
-                <form action="/logout" method="post">
-                    <button type="submit" class="btn btn-danger">Log Out</button>
-                </form>
-
-            </div>
+            {% endif %}
+            {% endfor %}
         </div>
+    </div>
+
+    <div class="container text-muted text-center">
+        <p>Country photos powered by Unsplash.com | Country flag images powered by Flagpedia.net</p>
+        <p>Country data powered by Restcountries.com | Travel data powered by Amadeus.com</p>
     </div>
 
 </body>

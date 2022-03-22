@@ -9,7 +9,7 @@ function getTravelRestrictions(countryCodeDeparture, countryCodeArrival) {
     fetch(url, {
         method: "GET",
         headers: {
-            "Authorization": "Bearer 7FzDVJFzm4eOkKpXp3UdxoEyfTet",
+            "Authorization": "Bearer yAZyqHRq3cCPPDlJT3bCAOHnHQcd",
         },
         mode:"cors",
         catch:"default"
@@ -23,12 +23,18 @@ function getTravelRestrictions(countryCodeDeparture, countryCodeArrival) {
 
         // Check travel ban
         let travelBan = document.querySelector("#travel-ban");
+        let depatureCountry = document.querySelector("#countries-departing").innerHTML;
+        let arrivalCountry = document.querySelector("#countries-travelling-to").innerHTML;
         for (let i = 0; i < data['data']['areaAccessRestriction']['entry']['bannedArea'].length; i++ ) {
             if (countryCodeDeparture == data['data']['areaAccessRestriction']['entry']['bannedArea'][i]['iataCode']) {
-                travelBan.innerHTML = 'Travel is currently banned';
+                travelBan.innerHTML = 'Travel from ' + depatureCountry + ' to ' + arrivalCountry + ' is currently banned.';
+                document.querySelector("#travel-ban").style.color = "red";
+                document.querySelector("#travel-ban").style.fontWeight = "bolder";
                 break
             } else {
-                travelBan.innerHTML = 'Travel is currently not banned';
+                travelBan.innerHTML = 'Travel from ' + depatureCountry + ' to ' + arrivalCountry + ' is currently allowed.';
+                document.querySelector("#travel-ban").style.color = "green";
+                document.querySelector("#travel-ban").style.fontWeight = "bolder";
             }
         }
         
@@ -41,7 +47,7 @@ function getTravelRestrictions(countryCodeDeparture, countryCodeArrival) {
         let documentRequired = document.querySelector("#documentation-required");
         let getDocumentRequired = data['data']['areaAccessRestriction']['declarationDocuments']['documentRequired'];
         if (typeof getDocumentRequired == 'undefined') {
-            documentRequired.innerHTML = 'N/A'
+            documentRequired.innerHTML = 'Information cannot be found at this time.'
         } else {
             documentRequired.innerHTML = getDocumentRequired;
         }
@@ -49,13 +55,18 @@ function getTravelRestrictions(countryCodeDeparture, countryCodeArrival) {
         // Set text summary
         let textSummary = document.querySelector("#summary");
         let getTextSummary = data['data']['areaAccessRestriction']['declarationDocuments']['text'];
-        textSummary.innerHTML=getTextSummary;
+        if (typeof getTextSummary == 'undefined') {
+            textSummary.innerHTML = 'Information cannot be found at this time.'
+        } else {        
+            textSummary.innerHTML=getTextSummary;
+        }
+
 
         // Set travel documentation link
         let travelDocumentationLink = document.querySelector("#documentation-link");
         let getTravelDocumentationLink = data['data']['areaAccessRestriction']['declarationDocuments']['travelDocumentationLink'];
         if (typeof getTravelDocumentationLink == 'undefined') {
-            travelDocumentationLink.innerHTML = 'N/A'
+            travelDocumentationLink.innerHTML = 'Information cannot be found at this time.'
         } else {
             travelDocumentationLink.innerHTML = getTravelDocumentationLink;
         }

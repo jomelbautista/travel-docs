@@ -54,9 +54,9 @@ class Trip:
     def validate_inputs(trip):
         is_valid = True
         if len(trip['departing_country']) < 1:
-            flash('Please select a departing Country', 'trips')
+            flash('Please select the Country you are leaving from.', 'trips')
             is_valid = False
         if len(trip['arriving_country']) < 1:
-            flash('Please select a Country to travel to.', 'trips')
+            flash('Please select the Country you are planning to travel to.', 'trips')
             is_valid = False
         return is_valid

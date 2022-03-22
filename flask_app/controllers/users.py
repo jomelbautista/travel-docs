@@ -65,7 +65,7 @@ def userlogin():
     return redirect('/dashboard')
 
 # Logout
-@app.route('/logout', methods=['POST'])
+@app.route('/logout')
 def logout():
     session.clear()
     print('Session Cleared')
