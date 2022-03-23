@@ -9,7 +9,7 @@ function getTravelRestrictions(countryCodeDeparture, countryCodeArrival) {
     fetch(url, {
         method: "GET",
         headers: {
-            "Authorization": "Bearer yAZyqHRq3cCPPDlJT3bCAOHnHQcd",
+            "Authorization": "Bearer vieSOXMpsme0lWLpvAoyGjGCzvM9",
         },
         mode:"cors",
         catch:"default"
